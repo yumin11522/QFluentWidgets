@@ -7,6 +7,7 @@
 #include <QPropertyAnimation>
 
 #include "Common/Icon.h"
+#include "Common/QtCompat.h"
 
 class VBoxLayout;
 class SettingCard;
@@ -30,7 +31,7 @@ public:
 protected:
     void mousePressEvent(QMouseEvent *event) override;
     void mouseReleaseEvent(QMouseEvent *event) override;
-    void enterEvent(QEvent *event) override;
+    void enterEvent(QfwEnterEvent *event) override;
     void leaveEvent(QEvent *event) override;
     void paintEvent(QPaintEvent *event) override;
 

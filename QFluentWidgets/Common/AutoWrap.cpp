@@ -12,12 +12,13 @@ static CharWidthType char_widths[] = {
 
 int TextWrap::getWidth(QChar c)
 {
-    if (c == 0xe || c == 0xf) {
+    if (c == QChar(0xe) || c == QChar(0xf)) {
         return 0;
     }
 
+    const uint code = c.unicode();
     for (auto nw : char_widths) {
-        if (c <= nw.num) {
+        if (code <= static_cast<uint>(nw.num)) {
             return nw.width;
         }
     }

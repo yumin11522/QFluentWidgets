@@ -27,7 +27,7 @@ TitleBar::TitleBar(QWidget *parent) : QWidget(parent)
     setLayout(hBoxLayout);
 
     hBoxLayout->setSpacing(0);
-    hBoxLayout->setMargin(0);
+    hBoxLayout->setContentsMargins(0, 0, 0, 0);
     hBoxLayout->setAlignment(Qt::AlignCenter | Qt::AlignLeft);
     hBoxLayout->addStretch(1);
     hBoxLayout->addWidget(minBtn, 0, Qt::AlignRight);
@@ -94,8 +94,8 @@ void TitleBar::mouseDoubleClickEvent(QMouseEvent *event)
 void TitleBar::mouseMoveEvent(QMouseEvent *event)
 {
 #if defined(Q_OS_WIN32)
-    if (canDrag(event->pos())) {
-        Win32Utils::WindowsMoveResize::startSystemMove(this->window(), event->globalPos());
+    if (canDrag(event->position().toPoint())) {
+        Win32Utils::WindowsMoveResize::startSystemMove(this->window(), event->globalPosition().toPoint());
     }
 
 #elif defined(Q_OS_OSX)
@@ -110,11 +110,11 @@ void TitleBar::mouseMoveEvent(QMouseEvent *event)
 void TitleBar::mousePressEvent(QMouseEvent *event)
 {
 #if !defined(Q_OS_WIN32)
-    if (canDrag(event->pos())) {
-        Win32Utils::WindowsMoveResize::startSystemMove(this->window(), event->globalPos());
+    if (canDrag(event->position().toPoint())) {
+        Win32Utils::WindowsMoveResize::startSystemMove(this->window(), event->globalPosition().toPoint());
     }
 #else
-
+    Q_UNUSED(event)
 #endif
 }
 

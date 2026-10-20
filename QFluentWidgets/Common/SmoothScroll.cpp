@@ -40,8 +40,14 @@ void SmoothScroll::wheelEvent(QWheelEvent *event)
 
     // adjust the acceration ratio based on unprocessed events
     double accerationRatio = qMin(m_scrollStamps.count() / 15.0, 1.0);
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+    m_lastWheelEvent.reset(new QWheelEvent(event->position(), event->globalPosition(), event->pixelDelta(),
+                                           event->angleDelta(), event->buttons(), event->modifiers(), event->phase(),
+                                           event->inverted(), event->source()));
+#else
     m_lastWheelEvent.reset(new QWheelEvent(event->pos(), event->globalPos(), event->pixelDelta(), event->angleDelta(),
                                            event->delta(), event->orientation(), event->buttons(), event->modifiers()));
+#endif
 
     // get the number of steps
     m_stepsTotal = m_fps * m_duration / 1000.0;
@@ -102,8 +108,13 @@ void SmoothScroll::smoothMove()
         bar = m_widget->horizontalScrollBar();
     }
 
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+    QWheelEvent e(m_lastWheelEvent->position(), m_lastWheelEvent->globalPosition(), QPoint(), p,
+                  m_lastWheelEvent->buttons(), Qt::NoModifier, Qt::ScrollUpdate, false);
+#else
     QWheelEvent e(m_lastWheelEvent->pos(), m_lastWheelEvent->globalPos(), QPoint(), p, qRound(totalDelta), m_orient,
                   m_lastWheelEvent->buttons(), Qt::NoModifier);
+#endif
 
     // send wheel event to app
     QApplication::sendEvent(bar, &e);

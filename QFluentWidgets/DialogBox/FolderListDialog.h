@@ -2,6 +2,7 @@
 #define FOLDERLISTDIALOG_H
 
 #include "MaskDialogBase.h"
+#include "Common/QtCompat.h"
 
 #include <QLabel>
 
@@ -63,7 +64,7 @@ public:
 protected:
     void mousePressEvent(QMouseEvent *event) override;
     void mouseReleaseEvent(QMouseEvent *event) override;
-    void enterEvent(QEvent *event) override;
+    void enterEvent(QfwEnterEvent *event) override;
     void leaveEvent(QEvent *event) override;
     void paintEvent(QPaintEvent *event) override;
 

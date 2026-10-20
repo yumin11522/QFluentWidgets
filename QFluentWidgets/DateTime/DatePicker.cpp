@@ -178,8 +178,8 @@ int DatePicker::monthColumnWidth()
     QFontMetrics fm = this->fontMetrics();
     int wm          = -1;
     for (auto i : columns[m_monthIndex]->items()) {
-        if (wm < fm.width(i.toString())) {
-            wm = fm.width(i.toString());
+        if (wm < fm.horizontalAdvance(i.toString())) {
+            wm = fm.horizontalAdvance(i.toString());
         }
     }
     wm += 20;

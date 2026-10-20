@@ -1,4 +1,4 @@
-﻿#include "view/MainWindow.h"
+#include "view/MainWindow.h"
 
 #include <QApplication>
 #include <FramelessHelper/Core/private/framelessconfig_p.h>
@@ -14,8 +14,10 @@ int main(int argc, char *argv[])
     QApplication::setHighDpiScaleFactorRoundingPolicy(Qt::HighDpiScaleFactorRoundingPolicy::PassThrough);
 #endif
 
+    #if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
     QApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
     QApplication::setAttribute(Qt::AA_UseHighDpiPixmaps);
+    #endif
 
     Log::setup(FRAMELESSHELPER_STRING_LITERAL("mainwindow"));
 

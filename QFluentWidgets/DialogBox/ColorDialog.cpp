@@ -7,7 +7,7 @@
 #include <QApplication>
 #include <QIntValidator>
 #include <QPainter>
-#include <QRegExp>
+#include <QRegularExpression>
 
 BrightnessSlider::BrightnessSlider(const QColor &color, QWidget *parent)
     : Slider(Qt::Horizontal, parent), m_color(color)
@@ -85,7 +85,7 @@ void ColorLineEdit::onTextEdited(const QString &text)
 
 HexColorLineEdit::HexColorLineEdit(const QColor &color, QWidget *parent) : ColorLineEdit(color.name().mid(1), parent)
 {
-    setValidator(new QRegExpValidator(QRegExp("[A-Fa-f0-9]{6}"), this));
+    setValidator(new QRegularExpressionValidator(QRegularExpression("[A-Fa-f0-9]{6}"), this));
     setTextMargins(4, 0, 33, 0);
     prefixLabel = new QLabel("#", this);
     prefixLabel->move(7, 2);

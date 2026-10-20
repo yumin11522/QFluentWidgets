@@ -2,7 +2,6 @@
 
 #include <QColor>
 #include <QCoreApplication>
-#include <QTextCodec>
 
 using namespace Qfw;
 
@@ -45,7 +44,9 @@ QConfig::QConfig(const QString &customPath, QObject *parent) : QObject(parent), 
 void QConfig::init()
 {
     m_settings.reset(new QSettings(m_filePath, QSettings::IniFormat));
-    m_settings->setIniCodec(QTextCodec::codecForName("utf-8"));
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
+    m_settings->setIniCodec("utf-8");
+#endif
 }
 
 QVariant QConfig::get(const QString &key, const QVariant &defaultValue) const

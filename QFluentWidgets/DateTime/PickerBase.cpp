@@ -230,8 +230,8 @@ void PickerBase::setColumnTight(int index)
     QFontMetrics fm = fontMetrics();
     int w           = -1;
     for (auto c : columns[index]->items()) {
-        if (w < fm.width(c.toString())) {
-            w = fm.width(c.toString());
+        if (w < fm.horizontalAdvance(c.toString())) {
+            w = fm.horizontalAdvance(c.toString());
         }
     }
 
@@ -366,7 +366,7 @@ void PickerBase::mouseReleaseEvent(QMouseEvent *event)
     QPushButton::mouseReleaseEvent(event);
 }
 
-void PickerBase::enterEvent(QEvent * /*event*/)
+void PickerBase::enterEvent(QfwEnterEvent * /*event*/)
 {
     setButtonProperty("enter", true);
 }

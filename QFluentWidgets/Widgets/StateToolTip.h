@@ -6,6 +6,8 @@
 #include <QPropertyAnimation>
 #include <QToolButton>
 
+#include "Common/QtCompat.h"
+
 class StateCloseButton : public QToolButton
 {
     Q_OBJECT
@@ -16,7 +18,7 @@ public:
 protected:
     void mousePressEvent(QMouseEvent *event) override;
     void mouseReleaseEvent(QMouseEvent *event) override;
-    void enterEvent(QEvent *event) override;
+    void enterEvent(QfwEnterEvent *event) override;
     void leaveEvent(QEvent *event) override;
     void paintEvent(QPaintEvent *event) override;
 

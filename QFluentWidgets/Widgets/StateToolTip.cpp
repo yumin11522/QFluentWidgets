@@ -25,7 +25,7 @@ void StateCloseButton::mouseReleaseEvent(QMouseEvent *event)
     QToolButton::mouseReleaseEvent(event);
 }
 
-void StateCloseButton::enterEvent(QEvent * /*event*/)
+void StateCloseButton::enterEvent(QfwEnterEvent * /*event*/)
 {
     m_isPressed = true;
     update();

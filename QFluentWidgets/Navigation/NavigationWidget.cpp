@@ -55,7 +55,7 @@ void NavigationWidget::mouseReleaseEvent(QMouseEvent * /*event*/)
     emit clicked(true);
 }
 
-void NavigationWidget::enterEvent(QEvent * /*event*/)
+void NavigationWidget::enterEvent(QfwEnterEvent * /*event*/)
 {
     isEnter = true;
     update();

@@ -9,6 +9,7 @@
 #include <QGraphicsDropShadowEffect>
 
 #include "Common/StyleSheet.h"
+#include "Common/QtCompat.h"
 
 class CycleListWidget;
 class TransparentToolButton;
@@ -135,7 +136,7 @@ public slots:
 protected:
     void mousePressEvent(QMouseEvent *event) override;
     void mouseReleaseEvent(QMouseEvent *event) override;
-    void enterEvent(QEvent *event) override;
+    void enterEvent(QfwEnterEvent *event) override;
     void leaveEvent(QEvent *event) override;
 
 private:

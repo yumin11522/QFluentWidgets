@@ -270,7 +270,7 @@ void CycleListWidget::resizeEvent(QResizeEvent * /*event*/)
     m_downButton->move(0, this->height() - 34);
 }
 
-void CycleListWidget::enterEvent(QEvent * /*event*/)
+void CycleListWidget::enterEvent(QfwEnterEvent * /*event*/)
 {
     m_upButton->show();
     m_downButton->show();

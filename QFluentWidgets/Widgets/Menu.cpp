@@ -291,11 +291,11 @@ QListWidgetItem *RoundMenu::createActionItem(QAction *const action, QAction *con
     QListWidgetItem *item = new QListWidgetItem(createItemIcon(action), action->text());
     int w                 = 0;
     if (!hasItemIcon()) {
-        w = 28 + m_view->fontMetrics().width(action->text());
+        w = 28 + m_view->fontMetrics().horizontalAdvance(action->text());
     } else {
         // add a blank character to increase space between icon and text
         item->setText(" " + item->text());
-        w = 60 + m_view->fontMetrics().width(item->text());
+        w = 60 + m_view->fontMetrics().horizontalAdvance(item->text());
     }
 
     item->setSizeHint(QSize(w, m_itemHeight));
@@ -364,11 +364,11 @@ QPair<QListWidgetItem *, SubMenuItemWidget *> RoundMenu::createSubMenuItem(Round
     QListWidgetItem *item = new QListWidgetItem(createItemIcon(menu), menu->title());
     int w                 = 0;
     if (!hasItemIcon()) {
-        w = 48 + m_view->fontMetrics().width(menu->title());
+        w = 48 + m_view->fontMetrics().horizontalAdvance(menu->title());
     } else {
         // add a blank character to increase space between icon and text
         item->setText(" " + item->text());
-        w = 60 + m_view->fontMetrics().width(item->text());
+        w = 60 + m_view->fontMetrics().horizontalAdvance(item->text());
     }
 
     // add submenu item
@@ -517,11 +517,11 @@ void RoundMenu::onActionChanged()
     int w = 0;
     if (!hasItemIcon()) {
         item->setText(action->text());
-        w = 28 + m_view->fontMetrics().width(action->text());
+        w = 28 + m_view->fontMetrics().horizontalAdvance(action->text());
     } else {
         // add a blank character to increase space between icon and text
         item->setText(" " + action->text());
-        w = 60 + m_view->fontMetrics().width(item->text());
+        w = 60 + m_view->fontMetrics().horizontalAdvance(item->text());
     }
 
     item->setSizeHint(QSize(w, m_itemHeight));
@@ -636,7 +636,7 @@ SubMenuItemWidget::SubMenuItemWidget(RoundMenu *menu, QListWidgetItem *item, QWi
 {
 }
 
-void SubMenuItemWidget::enterEvent(QEvent *event)
+void SubMenuItemWidget::enterEvent(QfwEnterEvent *event)
 {
     QWidget::enterEvent(event);
     emit showMenuSig(m_item);

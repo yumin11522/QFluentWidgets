@@ -211,7 +211,7 @@ void ClickableWindow::mouseReleaseEvent(QMouseEvent *event)
     }
 }
 
-void ClickableWindow::enterEvent(QEvent * /*event*/)
+void ClickableWindow::enterEvent(QfwEnterEvent * /*event*/)
 {
     m_isEnter = true;
     update();

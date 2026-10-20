@@ -3,6 +3,15 @@
 
 #include <QAbstractButton>
 #include <QDomDocument>
+#include <QtGlobal>
+
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+#  include <QEnterEvent>
+using QfwEnterEvent = QEnterEvent;
+#else
+class QEvent;
+using QfwEnterEvent = QEvent;
+#endif
 
 enum TitleBarButtonState
 {
@@ -62,7 +71,7 @@ signals:
     // QWidget interface
 protected:
     void mousePressEvent(QMouseEvent *event) Q_DECL_OVERRIDE;
-    void enterEvent(QEvent *event) Q_DECL_OVERRIDE;
+    void enterEvent(QfwEnterEvent *event) Q_DECL_OVERRIDE;
     void leaveEvent(QEvent *event) Q_DECL_OVERRIDE;
 };
 

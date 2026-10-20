@@ -3,6 +3,7 @@
 #include "Menu.h"
 
 #include <QPainter>
+#include <QPainterPath>
 
 QString SpinIcon::iconName(SpinIcon::IconType type)
 {

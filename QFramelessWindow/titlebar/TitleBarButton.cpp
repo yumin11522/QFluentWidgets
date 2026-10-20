@@ -122,7 +122,7 @@ void TitleBarButton::mousePressEvent(QMouseEvent *event)
     QAbstractButton::mousePressEvent(event);
 }
 
-void TitleBarButton::enterEvent(QEvent *event)
+void TitleBarButton::enterEvent(QfwEnterEvent *event)
 {
     setState(TitleBarButtonState::HOVER);
     QAbstractButton::enterEvent(event);

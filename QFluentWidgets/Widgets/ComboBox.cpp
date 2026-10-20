@@ -1,6 +1,7 @@
 ﻿#include "ComboBox.h"
 
 #include <QPainter>
+#include <QPainterPath>
 #include <QDebug>
 
 ComboListModel::ComboListModel(QObject *parent) : QAbstractListModel(parent) { }
@@ -131,7 +132,7 @@ QVariant ComboTableModel::data(const QModelIndex &index, int role) const
         return m_infoList.at(offset).icon;
     } else if (role == Qt::TextAlignmentRole) {
         return int(Qt::AlignHCenter | Qt::AlignVCenter);
-    } else if (role == Qt::TextColorRole) {
+    } else if (role == Qt::ForegroundRole) {
         return QColor(255, 0, 0);
     } else if (Qt::UserRole == role) {
         return m_infoList.at(offset).number;

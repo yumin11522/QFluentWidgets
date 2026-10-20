@@ -3,6 +3,7 @@
 
 #include <QWidget>
 #include "Common/Icon.h"
+#include "Common/QtCompat.h"
 
 class NavigationWidget : public QWidget
 {
@@ -25,7 +26,7 @@ public:
 protected:
     void mousePressEvent(QMouseEvent *event) override;
     void mouseReleaseEvent(QMouseEvent *event) override;
-    void enterEvent(QEvent *event) override;
+    void enterEvent(QfwEnterEvent *event) override;
     void leaveEvent(QEvent *event) override;
 
 signals:

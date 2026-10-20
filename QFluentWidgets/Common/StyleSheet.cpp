@@ -3,7 +3,6 @@
 
 #include <QFile>
 #include <QMap>
-#include <QTextCodec>
 #include <QTextStream>
 #include <QtMath>
 
@@ -40,8 +39,7 @@ QString StyleSheetBase::getStyleSheet(const QString &file, Qfw::Theme theme)
     QFile f(file);
     QString qss;
     if (f.open(QIODevice::ReadOnly)) {
-        QTextCodec *codec = QTextCodec::codecForName("UTF8");
-        qss               = codec->toUnicode(f.readAll());
+        qss = QString::fromUtf8(f.readAll());
         f.close();
     }
 
@@ -168,13 +166,7 @@ QString FluentStyleSheet::content(const QString &name)
     QFile f(fullName);
     QString qss = "";
     if (f.open(QIODevice::ReadOnly)) {
-        // 用QTextStream读取样式文件不用区分文件编码 带bom也行
-        QTextStream in(&f);
-        in.setCodec("utf-8");
-        while (!in.atEnd()) {
-            QString line = in.readLine();
-            qss += line + "\r\n";
-        }
+        qss = QString::fromUtf8(f.readAll());
         f.close();
     }
 
@@ -205,13 +197,7 @@ void FluentStyleSheet::apply(const QString &name, QWidget *widget)
     QFile f(fullName);
     QString qss = "";
     if (f.open(QIODevice::ReadOnly)) {
-        // 用QTextStream读取样式文件不用区分文件编码 带bom也行
-        QTextStream in(&f);
-        in.setCodec("utf-8");
-        while (!in.atEnd()) {
-            QString line = in.readLine();
-            qss += line + "\r\n";
-        }
+        qss = QString::fromUtf8(f.readAll());
         f.close();
     }
 
@@ -274,7 +260,11 @@ QColor ThemeColor::color() const
     QColor themeColor = QFWIns.themeColor();
 
     // transform color into hsv space
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+    float h, s, v;
+#else
     qreal h, s, v;
+#endif
     themeColor.getHsvF(&h, &s, &v);
 
     if (QFWIns.isDarkTheme()) {

@@ -1,6 +1,13 @@
 #pragma once
 #include <QAbstractNativeEventFilter>
 #include <QWindow>
+#include <QtGlobal>
+
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+using QfwNativeResult = qintptr;
+#else
+using QfwNativeResult = long;
+#endif
 
 class WindowsFramelessHelper;
 class TitleBar;
@@ -10,7 +17,7 @@ public:
 	static void deliver(QWindow *window, WindowsFramelessHelper *helper);
 protected:
 	bool nativeEventFilter(const QByteArray &eventType,
-		void *message, long *result) final;
+		void *message, QfwNativeResult *result) final;
 private:
 	static QScopedPointer<NativeWindowFilter> s_instance;
 	static QHash<WindowsFramelessHelper *, WId> s_windows;
@@ -43,7 +50,7 @@ public:
 
 public:
     qreal scaleFactor() const;
-    bool nativeEventFilter(const QByteArray & eventType, void *msg, long *result);
+    bool nativeEventFilter(const QByteArray & eventType, void *msg, QfwNativeResult *result);
 
 protected:
 	bool eventFilter(QObject *obj, QEvent *ev) final;

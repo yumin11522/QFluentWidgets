@@ -5,6 +5,7 @@
 #include "QFluentWidgets.h"
 
 #include <QPainter>
+#include <QPainterPath>
 #include <QHBoxLayout>
 #include <QMouseEvent>
 #include <QDebug>

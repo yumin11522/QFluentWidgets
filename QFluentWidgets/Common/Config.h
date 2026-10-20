@@ -40,7 +40,7 @@ namespace Qfw
         {
             qDebug() << __FUNCTION__ << __LINE__;
             if (options.isEmpty()) {
-                qDebug() << "The 'options' can't be empty" << endl;
+                qDebug() << "The 'options' can't be empty";
             }
 
             qDebug() << __FUNCTION__ << __LINE__;

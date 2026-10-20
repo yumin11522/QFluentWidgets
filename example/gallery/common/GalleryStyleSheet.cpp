@@ -45,13 +45,7 @@ QString GalleryStyleSheet::content(const QString &name)
     QFile f(fullName);
     QString qss = "";
     if (f.open(QIODevice::ReadOnly)) {
-        // 用QTextStream读取样式文件不用区分文件编码 带bom也行
-        QTextStream in(&f);
-        in.setCodec("utf-8");
-        while (!in.atEnd()) {
-            QString line = in.readLine();
-            qss += line + "\r\n";
-        }
+        qss = QString::fromUtf8(f.readAll());
         f.close();
     }
 

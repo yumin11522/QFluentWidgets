@@ -1,8 +1,6 @@
 QT       += core gui
 
-win32: {
-    QT += winextras
-}
+win32:lessThan(QT_MAJOR_VERSION, 6): QT += winextras
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -17,11 +15,12 @@ INCLUDEPATH += $$PWD/../../QFramelessWindow/titlebar
 
 
 CONFIG(debug, release|debug){
-    win32:LIBS += -lqframelesswindowd -luser32 -lDwmapi
-    else: LIBS += -lqframelesswindow -luser32 -lDwmapi
+    win32:LIBS += -lqframelesswindowd
+    else: LIBS += -lqframelesswindow
 } else {
     LIBS += -lqframelesswindow
 }
+win32: LIBS += -luser32 -ldwmapi
 
 
 

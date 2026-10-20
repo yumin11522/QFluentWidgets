@@ -13,6 +13,8 @@
 #include <QPlainTextEdit>
 #include <QEventLoop>
 
+#include "Common/QtCompat.h"
+
 class SmoothScroll;
 class MenuActionListWidget;
 class SubMenuItemWidget;
@@ -150,7 +152,7 @@ public:
     RoundMenu *roundMenu() const;
 
 protected:
-    virtual void enterEvent(QEvent *event) override;
+    virtual void enterEvent(QfwEnterEvent *event) override;
     virtual void paintEvent(QPaintEvent *event) override;
 
 signals:

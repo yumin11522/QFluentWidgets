@@ -39,7 +39,7 @@
 
 #include <QBoxLayout>
 #include <QDebug>
-#include <QDesktopWidget>
+#include <QScreen>
 
 extern template void Settings::set<QRect>(const QString &, const QString &, const QRect &);
 extern template void Settings::set<qreal>(const QString &, const QString &, const qreal &);
@@ -291,7 +291,8 @@ void MainWindow::initWindow()
 
     m_titleBar->setAttribute(Qt::WA_StyledBackground);
 
-    QRect desk = QApplication::desktop()->availableGeometry();
+    QScreen *screen = QApplication::primaryScreen();
+    QRect desk = screen ? screen->availableGeometry() : QRect();
     move(desk.width() / 2 - width() / 2, desk.height() / 2 - height() / 2);
 
     GalleryStyleSheet::apply(GalleryStyleSheet::MAIN_WINDOW, this);

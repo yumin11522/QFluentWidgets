@@ -48,7 +48,7 @@ void ExpandButton::mouseReleaseEvent(QMouseEvent *event)
     setPressed(false);
 }
 
-void ExpandButton::enterEvent(QEvent * /*event*/)
+void ExpandButton::enterEvent(QfwEnterEvent * /*event*/)
 {
     setHover(true);
 }

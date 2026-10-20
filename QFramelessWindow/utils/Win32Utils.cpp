@@ -1,7 +1,8 @@
 ﻿#include "Win32Utils.h"
+#include "QtWinCompat.h"
 
 #include <QWindow>
-#include <QtWin>
+#include <QWidget>
 
 namespace Win32Utils {
 
@@ -80,7 +81,7 @@ int getResizeBorderThickness(HWND hWnd, bool horizontal)
 #endif
 
     int thickness;
-    if (QtWin::isCompositionEnabled()) {
+    if (QtWinCompat::isCompositionEnabled()) {
         thickness = 8;
     } else {
         thickness = 4;

@@ -1,7 +1,11 @@
 QT += widgets core gui xml svg
 
-win32: {
-    QT += winextras
+win32 {
+    lessThan(QT_MAJOR_VERSION, 6) {
+        QT += winextras
+    } else {
+        LIBS += -ldwmapi
+    }
 }
 
 TEMPLATE = lib

@@ -35,7 +35,7 @@ MultiSelectComboBox::MultiSelectComboBox(QWidget *parent) : QComboBox(parent), i
     selectModel = new QStandardItemModel();
     selectItemView->setModel(selectModel);
     QHBoxLayout *lineLayout = new QHBoxLayout(this);
-    lineLayout->setMargin(0);
+    lineLayout->setContentsMargins(0, 0, 0, 0);
     lineLayout->setSpacing(0);
     lineLayout->addWidget(selectItemView);
     //安装事件过滤器，处理点击x删除

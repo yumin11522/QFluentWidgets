@@ -6,10 +6,10 @@
 #include <QScreen>
 #include <QOperatingSystemVersion>
 #include <QGraphicsDropShadowEffect>
-#include <QtWin>
 #include <qdebug.h>
 
 #include "../titlebar/TitleBar.h"
+#include "../utils/QtWinCompat.h"
 
 QScopedPointer<NativeWindowFilter> NativeWindowFilter::s_instance;
 
@@ -46,7 +46,7 @@ void NativeWindowFilter::deliver(QWindow *window, WindowsFramelessHelper *helper
     }
 }
 
-bool NativeWindowFilter::nativeEventFilter(const QByteArray &eventType, void *message, long *result)
+bool NativeWindowFilter::nativeEventFilter(const QByteArray &eventType, void *message, QfwNativeResult *result)
 {
     LPMSG msg = reinterpret_cast<LPMSG>(message);
     if (auto h = s_helpers.value(reinterpret_cast<WId>(msg->hwnd)))
@@ -125,7 +125,7 @@ bool WindowsFramelessHelper::getResizeEnabled() const
     return m_isResizeEnabled;
 }
 
-bool WindowsFramelessHelper::nativeEventFilter(const QByteArray &eventType, void *msg, long *result)
+bool WindowsFramelessHelper::nativeEventFilter(const QByteArray &eventType, void *msg, QfwNativeResult *result)
 {
     Q_CHECK_PTR(m_window);
     LPMSG lpMsg   = reinterpret_cast<LPMSG>(msg);
@@ -136,7 +136,7 @@ bool WindowsFramelessHelper::nativeEventFilter(const QByteArray &eventType, void
         *result = hitTest(GET_X_LPARAM(lParam), GET_Y_LPARAM(lParam));
         return true;
     } else if (WM_NCACTIVATE == lpMsg->message) {
-        if (!QtWin::isCompositionEnabled()) {
+        if (!QtWinCompat::isCompositionEnabled()) {
             if (result)
                 *result = 1;
             return true;
@@ -278,7 +278,7 @@ void WindowsFramelessHelper::updateWindowStyle()
     ;
     LONG newStyle = WS_POPUP | WS_THICKFRAME;
 
-    if (QtWin::isCompositionEnabled())
+    if (QtWinCompat::isCompositionEnabled())
         newStyle |= WS_CAPTION;
 
     if (m_window->flags() & Qt::CustomizeWindowHint) {
@@ -297,8 +297,8 @@ void WindowsFramelessHelper::updateWindowStyle()
 
     SetWindowPos(hWnd, NULL, 0, 0, 0, 0, SWP_NOOWNERZORDER | SWP_NOZORDER | SWP_FRAMECHANGED | SWP_NOMOVE | SWP_NOSIZE);
 
-    if (QtWin::isCompositionEnabled())
-        QtWin::extendFrameIntoClientArea(m_window, 1, 1, 1, 1);
+    if (QtWinCompat::isCompositionEnabled())
+        QtWinCompat::extendFrameIntoClientArea(m_window, 1, 1, 1, 1);
 }
 
 bool WindowsFramelessHelper::isMaximized() const

@@ -5,6 +5,7 @@
 #include <QToolButton>
 
 #include <Common/Icon.h>
+#include <Common/QtCompat.h>
 
 class SmoothScrollBar;
 
@@ -81,7 +82,7 @@ protected:
     void wheelEvent(QWheelEvent *event) override;
     void leaveEvent(QEvent *event) override;
     void resizeEvent(QResizeEvent *event) override;
-    void enterEvent(QEvent *event) override;
+    void enterEvent(QfwEnterEvent *event) override;
 
 signals:
     void currentItemChanged(QListWidgetItem *item);

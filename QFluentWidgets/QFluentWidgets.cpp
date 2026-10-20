@@ -1,7 +1,6 @@
 ﻿#include "QFluentWidgets.h"
 
 #include <QApplication>
-#include <QTextCodec>
 
 QFluentWidgets::QFluentWidgets()
 {
